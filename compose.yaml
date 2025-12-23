@@ -1,0 +1,17 @@
+name: homelab
+
+include:
+  - ./networks/traefik/compose.yaml
+  # devs - utils
+  - ./devs/portainer/compose.yaml
+  - ./devs/watchtower/compose.yaml
+  - ./devs/homepage/compose.yaml
+  # data - storage
+  - ./data/minio/compose.yaml
+networks:
+  traefik-net:
+    external: true
+  backend-net:
+    external: true
+  observability-net:
+    external: true

@@ -1,0 +1,97 @@
+.env
+
+# .gitignore for homelab/infra
+# Ignore local env files
+.env.*
+.env.local
+.env.*.local
+.envrc
+
+# Compose local/override/generated files (ignore only local/generated/override variants)
+**/docker-compose.override.yml
+**/docker-compose.override.yaml
+**/*-override.yml
+**/*-override.yaml
+**/*-local.yml
+**/*-local.yaml
+**/*-generated.yml
+**/*-generated.yaml
+**/*.local.yml
+**/*.local.yaml
+**/*.override.yml
+**/*.override.yaml
+
+# Ignore runtime envs and temporary files
+tmp/
+temp/
+*.tmp
+*.pid
+*.sock
+
+# Ignore persistent service data and volumes (do not commit service data)
+/data/
+**/data/
+**/data/**
+volumes/
+**/volumes/
+traefik_data/
+
+# Service-specific persistent storage
+minio/data/
+postgres/data/
+redis/data/
+vault/data/
+
+# Logs
+*.log
+logs/
+**/logs/
+
+# Secrets, keys and certs (avoid pushing private material)
+secrets/
+credentials/
+*.key
+*.pem
+*.p12
+*.srl
+.htpasswd
+
+# Docker / build artifacts
+**/.docker/
+docker-compose.override.*
+
+# Editor and OS files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.mypy_cache/
+.pytest_cache/
+venv/
+.venv/
+env/
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Terraform
+.terraform/
+
+# Misc
+dist/
+build/
+coverage/
+
+# If you intentionally track any of the above in the repo, remove the corresponding line(s).
+
+**/certs/**
+**/logs**

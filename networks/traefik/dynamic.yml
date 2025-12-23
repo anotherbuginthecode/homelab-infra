@@ -1,0 +1,21 @@
+http:
+  middlewares:
+    security-headers:
+      headers:
+        browserXssFilter: true
+        contentTypeNosniff: true
+        frameDeny: true
+        forceSTSHeader: true
+        stsSeconds: 31536000
+        stsIncludeSubdomains: true
+        stsPreload: true
+
+tls:
+  stores:
+    default:
+      defaultCertificate:
+        certFile: /etc/traefik/certs/lab.home.crt
+        keyFile: /etc/traefik/certs/lab.home.key
+  certificates:
+    - certFile: /etc/traefik/certs/lab.home.crt
+      keyFile: /etc/traefik/certs/lab.home.key

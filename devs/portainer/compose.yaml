@@ -1,0 +1,31 @@
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    restart: unless-stopped
+    env_file: ../../.env
+    ports:
+      - 9443:9443
+      - 9000:9000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - portainer_data:/data
+
+    networks:
+      - traefik-net
+
+    labels:
+      - "traefik.enable=true"
+      # Router
+      - "traefik.http.routers.portainer.rule=Host(`portainer.${DOMAIN}`)"
+      - "traefik.http.routers.portainer.entrypoints=websecure"
+      - "traefik.http.routers.portainer.tls=true"
+      - "traefik.http.services.portainer.loadbalancer.server.port=9000"
+      - "traefik.http.routers.portainer.middlewares=security-headers@file"
+
+volumes:
+  portainer_data:
+
+networks:
+  traefik-net:
+    external: true

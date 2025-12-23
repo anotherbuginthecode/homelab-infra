@@ -1,0 +1,33 @@
+# https://taskfile.dev
+version: '3'
+
+
+tasks:
+  pull:
+    cmds:
+      - docker compose pull
+    silent: true
+
+  up:
+    cmds:
+      - docker compose up -d
+    silent: true
+
+  down:
+    cmds:
+      - docker compose down
+    silent: true
+
+  recreate:
+    cmds:
+      - docker compose up -d --force-recreate
+    silent: true
+
+  edit:
+    cmds:
+      - nano compose.yaml
+    silent: true
+
+  dns-sync:
+    cmds:
+      - bash -c "cd scripts && source .venv/bin/activate && python pihole_sync_from_traefik.py"

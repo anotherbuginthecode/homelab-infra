@@ -1,0 +1,29 @@
+services:
+  traefik:
+    image: traefik
+    container_name: traefik
+    restart: unless-stopped
+    env_file: ../../.env
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - traefik-net
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./traefik.yml:/etc/traefik/traefik.yml:ro
+      - ./dynamic.yml:/etc/traefik/dynamic.yml:ro
+      - ./certs:/etc/traefik/certs:ro
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.${DOMAIN}`)"
+      - "traefik.http.routers.traefik.entrypoints=websecure"
+      - "traefik.http.routers.traefik.tls=true"
+      - "traefik.http.routers.traefik.service=api@internal"
+      - "traefik.http.routers.traefik.middlewares=traefik-auth,security-headers@file"
+      - "traefik.http.middlewares.traefik-auth.basicauth.users=${TRAEFIK_DASHBOARD_USERS}"
+      - "traefik.http.middlewares.traefik-whitelist.ipallowlist.sourcerange=192.168.1.0/24,10.0.0.0/8"
+
+networks:
+  traefik-net:
+    external: true

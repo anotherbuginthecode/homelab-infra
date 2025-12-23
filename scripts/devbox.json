@@ -1,0 +1,9 @@
+{
+    "packages": [
+        "python313",
+        "python313Packages.pip"
+    ],
+    "shell": {
+        "init_hook": ". $VENV_DIR/bin/activate"
+    }
+}

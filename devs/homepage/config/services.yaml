@@ -1,0 +1,12 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/services/
+
+- Monitoring:
+    - Portainer:
+        href: https://portainer.lab.home
+        description: Portainer CE
+- Data:
+    - Minio Console:
+        href: https://s3console.lab.home
+        description: Access to Minio Web UI
